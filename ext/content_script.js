@@ -87,5 +87,7 @@ function ultimate_trans(e){
 		}, 120);
 	}
 
-	window.setTimeout(increase_trans, 110);
+	if(capo > 0){
+		window.setTimeout(increase_trans, 110);
+	}
 }
