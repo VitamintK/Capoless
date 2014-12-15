@@ -1,5 +1,7 @@
+var capo = 0;
 walk(document.body);
 window.addEventListener("load", ultimate_trans, false);
+
 
 
 function walk(node) 
@@ -42,6 +44,7 @@ function handleText(textNode)
 		matches.push(match);
 		match = re.exec(v);
 	}
+	
 
 	if(matches.length != 0){
 		transpose(v, matches, textNode)
@@ -54,13 +57,14 @@ function handleText(textNode)
 }
 
 function transpose(v, matches, textNode){
-	console.log(matches);
+	capo = matches[matches.length - 1][1];
+	//console.log(matches);
 
 	
-	v = v.replace(/\bThe Cloud\b/g, "My Butt");
-	v = v.replace(/\bThe cloud\b/g, "My butt");
-	v = v.replace(/\bthe Cloud\b/g, "my Butt");
-	v = v.replace(/\bthe cloud\b/g, "my butt");
+	//v = v.replace(/\bThe Cloud\b/g, "My Butt");
+	//v = v.replace(/\bThe cloud\b/g, "My butt");
+	//v = v.replace(/\bthe Cloud\b/g, "my Butt");
+	//v = v.replace(/\bthe cloud\b/g, "my butt");
 	
 	textNode.nodeValue = v;
 }
@@ -69,15 +73,19 @@ function ultimate_trans(e){
 	document.getElementById("transpose_reset_val").click()
 	console.log("reset!")
 
-	iterations = 0;
-	var interval = window.setInterval(function(){
-		iterations++;
-    	var transpose_buts = document.getElementsByClassName('u_b');
-		if(transpose_buts.length != 0){
-			transpose_buts[0].click();
-		}
-		if(iterations >= 5){
-			clearInterval(interval);
-		}
-	}, 140);
+	function increase_trans(){
+		iterations = 0;
+		var interval = window.setInterval(function(){
+			iterations++;
+	    	var transpose_buts = document.getElementsByClassName('u_b');
+			if(transpose_buts.length != 0){
+				transpose_buts[0].click();
+			}
+			if(iterations >= capo){
+				clearInterval(interval);
+			}
+		}, 120);
+	}
+
+	window.setTimeout(increase_trans, 110);
 }
