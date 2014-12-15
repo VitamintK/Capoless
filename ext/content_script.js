@@ -67,12 +67,17 @@ function transpose(v, matches, textNode){
 
 function ultimate_trans(e){
 	document.getElementById("transpose_reset_val").click()
+	console.log("reset!")
 
-
-	var transpose_buts = document.getElementsByClassName('u_b');
-	if(transpose_buts.length != 0){
-		transpose_buts[0].click();
-		console.log("did it!")
-	}
-	console.log(transpose_buts.length)
+	iterations = 0;
+	var interval = window.setInterval(function(){
+		iterations++;
+    	var transpose_buts = document.getElementsByClassName('u_b');
+		if(transpose_buts.length != 0){
+			transpose_buts[0].click();
+		}
+		if(iterations >= 5){
+			clearInterval(interval);
+		}
+	}, 140);
 }
