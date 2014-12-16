@@ -2,7 +2,10 @@ var capo = 0;
 walk(document.body);
 window.addEventListener("load", ultimate_trans, false);
 
-
+//check for "Capo on 2nd", 3rd, 4th, etc.
+//check for "capo: 3"
+//check for "Standard/Capo on Fourth"
+//check for "[Capo at the 4th fret]"
 
 function walk(node) 
 {
@@ -84,10 +87,10 @@ function ultimate_trans(e){
 			if(iterations >= capo){
 				clearInterval(interval);
 			}
-		}, 120);
+		}, 130);
 	}
 
 	if(capo > 0){
-		window.setTimeout(increase_trans, 110);
+		window.setTimeout(increase_trans, 130);
 	}
 }
