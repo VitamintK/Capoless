@@ -39,7 +39,7 @@ function handleText(textNode)
 {
 	matches = [];
 	var v = textNode.nodeValue;
-	var re = /capo(?: on)?\s(\d)\b/ig;
+	var re = /capo(?: on)?\s(\d).*?\b(?: fret)?/ig;
 
 	match = re.exec(v);
 
@@ -74,7 +74,7 @@ function transpose(v, matches, textNode){
 	//console.log(textNode.innerHTML);
 	//textNode.nodeValue = v;
 	//console.log(textNode.parentNode.innerHTML);
-	textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<mark>" + matches[matches.length - 1][0] + "</mark>");
+	textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<span class='highlight'>" + matches[matches.length - 1][0] + "</span>");
 }
 
 function ultimate_trans(e){
