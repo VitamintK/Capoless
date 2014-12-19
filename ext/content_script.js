@@ -66,19 +66,15 @@ function transpose(v, matches, textNode){
 	matchedtext = new RegExp(matches[matches.length - 1][0], 'g')
 
 	//v = v.replace(matchedtext, "<span class='highlight'> " + matches[matches.length - 1][0] + " </span>");
-	var highlighted = document.createElement('high'); //<--- surely there has to be an easier way to highlight text???
-	highlighted.innerHTML = "<span class='highlight'> " + matches[matches.length - 1][0] + " </span>";
+	//var highlighted = document.createElement('high'); //<--- surely there has to be an easier way to highlight text???
+	//highlighted.innerHTML = "<span class='highlight'> " + matches[matches.length - 1][0] + " </span>";
 
-
-	//v = v.replace(/\bThe cloud\b/g, "My butt");
-	//v = v.replace(/\bthe Cloud\b/g, "my Butt");
-	//v = v.replace(/\bthe cloud\b/g, "my butt");
-	console.log(textNode);
-	console.log(v);
-	console.log(textNode.innerHTML);
+	//console.log(textNode);
+	//console.log(v);
+	//console.log(textNode.innerHTML);
 	//textNode.nodeValue = v;
-	console.log(textNode.parentNode.innerHTML);
-	textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<span class='highlight'>" + matches[matches.length - 1][0] + " </span>");
+	//console.log(textNode.parentNode.innerHTML);
+	textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<mark>" + matches[matches.length - 1][0] + "</mark>");
 }
 
 function ultimate_trans(e){
