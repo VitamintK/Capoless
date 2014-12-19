@@ -1,4 +1,4 @@
-[Capoless](vitamintk.github.io/Capoless/)
+[Capoless](http://vitamintk.github.io/Capoless/)
 ========
 
 Chrome extension to transpose capo-ed guitar chords to their actual keys!!
