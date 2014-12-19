@@ -11,6 +11,7 @@ function walk(node)
 {
 	// I stole this function from here:
 	// http://is.gd/mwZp7E
+	//which I stole from https://github.com/panicsteve/cloud-to-butt
 	
 	var child, next;
 
