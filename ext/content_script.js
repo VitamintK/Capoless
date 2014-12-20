@@ -49,7 +49,7 @@ function handleText(textNode)
 {
 	matches = [];
 	var v = textNode.nodeValue;
-	var re = /capo(?: on| at)?(?: the)?\s(\d).*?\b(?: fret)?/ig;
+	var re = /capo(?: on| at|:)?(?: the)?\s(\d).*?\b(?: fret)?/ig;
 	//what words appear between "capo (on)?" and "\d"?  It seems to be only "the".  If another case is found, update with ".*"
 
 	match = re.exec(v);
