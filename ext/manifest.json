@@ -9,5 +9,7 @@
       "js": ["content_script.js"],
       "run_at": "document_end"
     }
-  ]
+  ],
+  "icons": {"48": "Guitar-icon48.png",
+            "128": "Guitar-icon128.png" }
 }
