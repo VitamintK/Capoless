@@ -76,6 +76,16 @@ function transpose(v, matches, textNode){
 	//textNode.nodeValue = v;
 	//console.log(textNode.parentNode.innerHTML);
 	textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<span class='highlight'>" + matches[matches.length - 1][0] + "</span>");
+
+	//GENERAL CODE STARTS HERE - AKA NOT ULTIMATE-GUITAR
+
+	//use regex to match all instances of case-insensitive /b[ABCDEFG][#b♭]?
+	//possible situations: EbMaj7, Eb Maj add 9, Eb5.  Any situations in which something prepends the note without word boundary?
+
+	//notes are: C, C#, D, Eb, E, F, F#, G, Ab, A, Bb, B.  preserve case (minor/major)
+	//decide between C# and Db, and F# and Gb?
+	//notes[(notes.index(orignote) + caponum) mod 12]
+
 }
 
 function ultimate_trans(e){
