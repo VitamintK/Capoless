@@ -6,6 +6,15 @@ window.addEventListener("load", ultimate_trans, false);
 //check for "capo: 3"
 //check for "Standard/Capo on Fourth"
 //check for "[Capo at the 4th fret]"
+//TODO: for pages with multiple songs (such as albums [http://tabs.ultimate-guitar.com/t/taylor_swift/1989_album_crd.htm]),
+//transpose each chord based on the most recent capo found.  For example,
+//Capo 5
+//C A B
+//Capo 3
+//D E D
+//should use the capo value of 5 to transpose the CAB, and the capo value of 3 to transpose DED.
+//
+//Also, add an option to click a highlighted text "Capo on 5th fret" to turn transposing on and off.
 
 function walk(node) 
 {
@@ -40,7 +49,8 @@ function handleText(textNode)
 {
 	matches = [];
 	var v = textNode.nodeValue;
-	var re = /capo(?: on)?\s(\d).*?\b(?: fret)?/ig;
+	var re = /capo(?: on| at)?(?: the)?\s(\d).*?\b(?: fret)?/ig;
+	//what words appear between "capo (on)?" and "\d"?  It seems to be only "the".  If another case is found, update with ".*"
 
 	match = re.exec(v);
 
@@ -83,8 +93,10 @@ function transpose(v, matches, textNode){
 	//possible situations: EbMaj7, Eb Maj add 9, Eb5.  Any situations in which something prepends the note without word boundary?
 
 	//notes are: C, C#, D, Eb, E, F, F#, G, Ab, A, Bb, B.  preserve case (minor/major)
-	//decide between C# and Db, and F# and Gb?
+	//decide between C# and Db, and F# and Gb?  If F, Eb, Ab, or Bb are present, then call it Db. If E, A, B are present, call it C#.  Otherwise...
+	// Db I guess.
 	//notes[(notes.index(orignote) + caponum) mod 12]
+	//
 
 }
 
