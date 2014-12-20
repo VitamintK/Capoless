@@ -6,6 +6,7 @@ window.addEventListener("load", ultimate_trans, false);
 //check for "capo: 3"
 //check for "Standard/Capo on Fourth"
 //check for "[Capo at the 4th fret]"
+//check for "Capo at the 11th fret"
 //TODO: for pages with multiple songs (such as albums [http://tabs.ultimate-guitar.com/t/taylor_swift/1989_album_crd.htm]),
 //transpose each chord based on the most recent capo found.  For example,
 //Capo 5
@@ -15,6 +16,7 @@ window.addEventListener("load", ultimate_trans, false);
 //should use the capo value of 5 to transpose the CAB, and the capo value of 3 to transpose DED.
 //
 //Also, add an option to click a highlighted text "Capo on 5th fret" to turn transposing on and off.
+//maybe also add parser for "tune down half-step" etc., and transpose those as well.
 
 function walk(node) 
 {
@@ -89,7 +91,7 @@ function transpose(v, matches, textNode){
 
 	//GENERAL CODE STARTS HERE - AKA NOT ULTIMATE-GUITAR
 
-	//use regex to match all instances of case-insensitive /b[ABCDEFG][#b♭]?
+	//use regex to match all instances of case-insensitive /b[ABCDEFG][#b♭]? (double-flats and sharps? not a concern for now)
 	//possible situations: EbMaj7, Eb Maj add 9, Eb5.  Any situations in which something prepends the note without word boundary?
 
 	//notes are: C, C#, D, Eb, E, F, F#, G, Ab, A, Bb, B.  preserve case (minor/major)
@@ -97,6 +99,15 @@ function transpose(v, matches, textNode){
 	// Db I guess.
 	//notes[(notes.index(orignote) + caponum) mod 12]
 	//
+	chords = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
+	chordmatches = [];
+	var chordre = /\babcdefg[#b♭]?/ig;
+	chord = chordre.exec(v);
+
+	while(chord != null){
+		chordmatches.push(chord);
+		chord = re.exec(v);
+	}
 
 }
 
