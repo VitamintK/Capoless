@@ -6,11 +6,6 @@ for(var i = 0; i<nodesWithCapo.length; i++){
 }
 //window.addEventListener("load", ultimate_trans, false);
 
-//check for "Capo on 2nd", 3rd, 4th, etc.
-//check for "capo: 3"
-//check for "Standard/Capo on Fourth"
-//check for "[Capo at the 4th fret]"
-//check for "Capo at the 11th fret"
 //TODO: for pages with multiple songs (such as albums [http://tabs.ultimate-guitar.com/t/taylor_swift/1989_album_crd.htm]),
 //transpose each chord based on the most recent capo found.  For example,
 //Capo 5
@@ -21,6 +16,9 @@ for(var i = 0; i<nodesWithCapo.length; i++){
 //
 //Also, add an option to click a highlighted text "Capo on 5th fret" to turn transposing on and off.
 //maybe also add parser for "tune down half-step" etc., and transpose those as well.
+//
+//MOST PRESSING TO-DO:
+//DO NOT INTERPRET the word "a" as the chord "a".  Example of bad: Love’s c game, want to plaaaaay?
 
 
 function highlightCapo(nodeAndText){
@@ -92,12 +90,8 @@ function handleText(textNode)
 		transpose(v, matches, textNode);
 	}
 
-
-	//document.getElementById('a.u_b').click();
 	//using the array matches (which stores all the possible capos in the text), we can give the user
-	//an option to select which capo they would like.  
-
-	
+	//an option to select which capo they would like.
 }
 
 
