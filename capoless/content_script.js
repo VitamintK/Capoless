@@ -1,5 +1,9 @@
 var capo = 0;
+var nodesWithCapo = [];
 walk(document.body);
+for(var i = 0; i<nodesWithCapo.length; i++){
+	highlightCapo(nodesWithCapo[i]);
+}
 //window.addEventListener("load", ultimate_trans, false);
 
 //check for "Capo on 2nd", 3rd, 4th, etc.
@@ -17,6 +21,14 @@ walk(document.body);
 //
 //Also, add an option to click a highlighted text "Capo on 5th fret" to turn transposing on and off.
 //maybe also add parser for "tune down half-step" etc., and transpose those as well.
+
+
+function highlightCapo(nodeAndText){
+	textNode = nodeAndText[0];
+	matchedtext = nodeAndText[1];
+	matchedmatchedtext = nodeAndText[2];
+	textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<mark>" + matchedmatchedtext + "</mark>");
+}
 
 function walk(node) 
 {
@@ -132,8 +144,8 @@ function getcapo(v, matches, textNode){
 	
 
 
-	//textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<span class='highlight'>" + matches[matches.length - 1][0] + "</span>");
-
+	//textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<mark>" + matches[matches.length - 1][0] + "</mark>");
+	nodesWithCapo.push([textNode, matchedtext, matches[matches.length - 1][0]]);
 
 
 

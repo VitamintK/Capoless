@@ -5,7 +5,7 @@
   "description": "automatically transposes chords to the capo'd interval.",
   "content_scripts": [
     {
-      "matches": ["*://*.ultimate-guitar.com/*"],
+      "matches": ["*://*.ultimate-guitar.com/*", "http://*/*", "https://*/*"],
       "js": ["content_script.js"],
       "run_at": "document_end"
     }
