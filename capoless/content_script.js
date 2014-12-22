@@ -67,7 +67,7 @@ function handleText(textNode)
 {
 	matches = [];
 	var v = textNode.nodeValue;
-	var re = /capo(?: on| at|:)?(?: the)?\s(\d).*?\b(?: fret)?/ig;
+	var re = /capo(?: on| at|:)?(?: the)?\s(\d|first).*?\b(?: fret)?/ig;
 	//what words appear between "capo (on)?" and "\d"?  It seems to be only "the".  If another case is found, update with ".*"
 
 	match = re.exec(v);
@@ -106,9 +106,10 @@ function transpose(v, matches, textNode){
 	//
 	chords = ["c", "c#", "d", "eb", "e", "f", "f#", "g", "ab", "a", "bb", "b"]
 	function transposechord(match, letter, offset, string){
+		console.log(letter);
 		uppercase = (letter == letter.toUpperCase());
 		letter = letter.replace('♭', 'b').toLowerCase();
-		//console.log(letter);
+		console.log(letter);
 		//console.log(chords.indexOf(letter)+ capo);
 		if(uppercase){
 			newletter = chords[(chords.indexOf(letter) + capo) % 12];
@@ -120,16 +121,20 @@ function transpose(v, matches, textNode){
 
 	}
 	//chordmatches = [];
-	var chordre = /\b([abcdefg][#b♭]?)\s?(?:m|aug|dom|\d|sus|add|\b)/ig;
+	var chordre = /\b([abcdefg][#b♭]?)\s?(?:m|aug|dom|\d|sus|add|\b|$|,)/ig;
 	//chord = chordre.exec(v);
 	//console.log(chord);
 	v = v.replace(chordre, transposechord)
-	//console.log(v);
 	textNode.nodeValue = v;
 }
 
 function getcapo(v, matches, textNode){
-	capo = parseInt(matches[matches.length - 1][1]);
+	lastcapo = matches[matches.length - 1][1]
+	if(lastcapo.toLowerCase() == 'first'){
+		capo = 1;
+	} else {
+		capo = parseInt(matches[matches.length - 1][1]);
+	}
 	matchedtext = new RegExp(matches[matches.length - 1][0], 'g')
 	//textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<mark>" + matches[matches.length - 1][0] + "</mark>");
 	nodesWithCapo.push([textNode, matchedtext, matches[matches.length - 1][0]]);
