@@ -72,6 +72,8 @@ function handleText(textNode)
 	
 }
 
+
+
 function transpose(v, matches, textNode){
 	capo = matches[matches.length - 1][1];
 	//console.log(matches);
@@ -99,15 +101,25 @@ function transpose(v, matches, textNode){
 	// Db I guess.
 	//notes[(notes.index(orignote) + caponum) mod 12]
 	//
-	chords = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
+	chords = ["c", "c#", "d", "eb", "e", "f", "f#", "g", "ab", "a", "bb", "b"]
+	function transposechord(match, offset, string){
+		match = match.replace('♭', 'b').toLowerCase();
+		return chords[(chords.indexOf(match) + capo) % 12];
+	}
 	chordmatches = [];
 	var chordre = /\babcdefg[#b♭]?/ig;
-	chord = chordre.exec(v);
+	//chord = chordre.exec(v);
+	v.replace(chordre, transposechord)
+	console.log(v);
+	textNode.nodevalue = v;
 
-	while(chord != null){
-		chordmatches.push(chord);
-		chord = re.exec(v);
-	}
+	//while(chord != null){
+	//	chordmatches.push(chord);
+		//do stuff with chord
+	//	v.replace(chordre, transposechord)
+		//
+		//chord = re.exec(v);
+	//}
 
 }
 
