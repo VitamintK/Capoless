@@ -1,5 +1,4 @@
 var capo = 0;
-console.log(document.body);
 walk(document.body);
 //window.addEventListener("load", ultimate_trans, false);
 
@@ -92,20 +91,31 @@ function handleText(textNode)
 
 function transpose(v, matches, textNode){
 	chords = ["c", "c#", "d", "eb", "e", "f", "f#", "g", "ab", "a", "bb", "b"]
-	function transposechord(match, offset, string){
-		match = match.replace('♭', 'b').toLowerCase();
-		return chords[(chords.indexOf(match) + capo) % 12];
+	function transposechord(match, letter, offset, string){
+		uppercase = (letter == letter.toUpperCase());
+		letter = letter.replace('♭', 'b').toLowerCase();
+		//console.log(letter);
+		//console.log(chords.indexOf(letter)+ capo);
+		if(uppercase){
+			newletter = chords[(chords.indexOf(letter) + capo) % 12];
+			newletter = newletter[0].toUpperCase() + newletter.slice(1) + match.slice(letter.length);
+			return newletter;
+		} else{
+			return chords[(chords.indexOf(letter) + capo) % 12] + match.slice(letter.length);
+		}
+
 	}
-	chordmatches = [];
-	var chordre = /\babcdefg[#b♭]?/ig;
+	//chordmatches = [];
+	var chordre = /\b([abcdefg][#b♭]?)\s?(?:m|aug|dom|\d|sus|add|\b)/ig;
 	//chord = chordre.exec(v);
-	v.replace(chordre, transposechord)
-	console.log(v);
-	textNode.nodevalue = v;
+	//console.log(chord);
+	v = v.replace(chordre, transposechord)
+	//console.log(v);
+	textNode.nodeValue = v;
 }
 
 function getcapo(v, matches, textNode){
-	capo = matches[matches.length - 1][1];
+	capo = parseInt(matches[matches.length - 1][1]);
 	//console.log(matches);
 
 	matchedtext = new RegExp(matches[matches.length - 1][0], 'g')
