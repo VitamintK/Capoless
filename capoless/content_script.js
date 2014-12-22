@@ -1,6 +1,7 @@
 var capo = 0;
+console.log(document.body);
 walk(document.body);
-window.addEventListener("load", ultimate_trans, false);
+//window.addEventListener("load", ultimate_trans, false);
 
 //check for "Capo on 2nd", 3rd, 4th, etc.
 //check for "capo: 3"
@@ -26,7 +27,6 @@ function walk(node)
 	
 	var child, next;
 
-
 	switch ( node.nodeType )  
 	{
 		case 1:  // Element
@@ -43,6 +43,13 @@ function walk(node)
 
 		case 3: // Text node
 			handleText(node);
+			child = node.firstChild;
+			while ( child ) 
+			{
+				next = child.nextSibling;
+				walk(child);
+				child = next;
+			}
 			break;
 	}
 }
@@ -63,8 +70,18 @@ function handleText(textNode)
 	
 
 	if(matches.length != 0){
-		transpose(v, matches, textNode)
+		getcapo(v, matches, textNode)
 	}
+
+	if(capo != 0){ 
+		//THIS ASSUMES THAT A PAGE WILL NEVER MENTION CAPO _AFTER_ THE CHORDS.
+		//IF THIS TURNS OUT TO BE AN IMPORTANT ENOUGH INCORRECT ASSUMPTION,
+		//THEN DO A SECOND WALK THROUGH THE TEXT NODES AFTER CAPO IS FOUND,
+		//INSTEAD OF IN THE SAME WALK AS FINDING CAPO.
+		transpose(v, matches, textNode);
+	}
+
+
 	//document.getElementById('a.u_b').click();
 	//using the array matches (which stores all the possible capos in the text), we can give the user
 	//an option to select which capo they would like.  
@@ -73,8 +90,21 @@ function handleText(textNode)
 }
 
 
-
 function transpose(v, matches, textNode){
+	chords = ["c", "c#", "d", "eb", "e", "f", "f#", "g", "ab", "a", "bb", "b"]
+	function transposechord(match, offset, string){
+		match = match.replace('♭', 'b').toLowerCase();
+		return chords[(chords.indexOf(match) + capo) % 12];
+	}
+	chordmatches = [];
+	var chordre = /\babcdefg[#b♭]?/ig;
+	//chord = chordre.exec(v);
+	v.replace(chordre, transposechord)
+	console.log(v);
+	textNode.nodevalue = v;
+}
+
+function getcapo(v, matches, textNode){
 	capo = matches[matches.length - 1][1];
 	//console.log(matches);
 
@@ -89,7 +119,13 @@ function transpose(v, matches, textNode){
 	//console.log(textNode.innerHTML);
 	//textNode.nodeValue = v;
 	//console.log(textNode.parentNode.innerHTML);
-	textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<span class='highlight'>" + matches[matches.length - 1][0] + "</span>");
+	
+
+
+	//textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<span class='highlight'>" + matches[matches.length - 1][0] + "</span>");
+
+
+
 
 	//GENERAL CODE STARTS HERE - AKA NOT ULTIMATE-GUITAR
 
@@ -101,17 +137,7 @@ function transpose(v, matches, textNode){
 	// Db I guess.
 	//notes[(notes.index(orignote) + caponum) mod 12]
 	//
-	chords = ["c", "c#", "d", "eb", "e", "f", "f#", "g", "ab", "a", "bb", "b"]
-	function transposechord(match, offset, string){
-		match = match.replace('♭', 'b').toLowerCase();
-		return chords[(chords.indexOf(match) + capo) % 12];
-	}
-	chordmatches = [];
-	var chordre = /\babcdefg[#b♭]?/ig;
-	//chord = chordre.exec(v);
-	v.replace(chordre, transposechord)
-	console.log(v);
-	textNode.nodevalue = v;
+	
 
 	//while(chord != null){
 	//	chordmatches.push(chord);
