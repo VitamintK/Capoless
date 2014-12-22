@@ -102,6 +102,14 @@ function handleText(textNode)
 
 
 function transpose(v, matches, textNode){
+	//use regex to match all instances of case-insensitive /b[ABCDEFG][#b♭]? (double-flats and sharps? not a concern for now)
+	//possible situations: EbMaj7, Eb Maj add 9, Eb5.  Any situations in which something prepends the note without word boundary?
+
+	//notes are: C, C#, D, Eb, E, F, F#, G, Ab, A, Bb, B.  preserve case (minor/major)
+	//decide between C# and Db, and F# and Gb?  If F, Eb, Ab, or Bb are present, then call it Db. If E, A, B are present, call it C#.  Otherwise...
+	// Db I guess.
+	//notes[(notes.index(orignote) + caponum) mod 12]
+	//
 	chords = ["c", "c#", "d", "eb", "e", "f", "f#", "g", "ab", "a", "bb", "b"]
 	function transposechord(match, letter, offset, string){
 		uppercase = (letter == letter.toUpperCase());
@@ -128,47 +136,9 @@ function transpose(v, matches, textNode){
 
 function getcapo(v, matches, textNode){
 	capo = parseInt(matches[matches.length - 1][1]);
-	//console.log(matches);
-
 	matchedtext = new RegExp(matches[matches.length - 1][0], 'g')
-
-	//v = v.replace(matchedtext, "<span class='highlight'> " + matches[matches.length - 1][0] + " </span>");
-	//var highlighted = document.createElement('high'); //<--- surely there has to be an easier way to highlight text???
-	//highlighted.innerHTML = "<span class='highlight'> " + matches[matches.length - 1][0] + " </span>";
-
-	//console.log(textNode);
-	//console.log(v);
-	//console.log(textNode.innerHTML);
-	//textNode.nodeValue = v;
-	//console.log(textNode.parentNode.innerHTML);
-	
-
-
 	//textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<mark>" + matches[matches.length - 1][0] + "</mark>");
 	nodesWithCapo.push([textNode, matchedtext, matches[matches.length - 1][0]]);
-
-
-
-	//GENERAL CODE STARTS HERE - AKA NOT ULTIMATE-GUITAR
-
-	//use regex to match all instances of case-insensitive /b[ABCDEFG][#b♭]? (double-flats and sharps? not a concern for now)
-	//possible situations: EbMaj7, Eb Maj add 9, Eb5.  Any situations in which something prepends the note without word boundary?
-
-	//notes are: C, C#, D, Eb, E, F, F#, G, Ab, A, Bb, B.  preserve case (minor/major)
-	//decide between C# and Db, and F# and Gb?  If F, Eb, Ab, or Bb are present, then call it Db. If E, A, B are present, call it C#.  Otherwise...
-	// Db I guess.
-	//notes[(notes.index(orignote) + caponum) mod 12]
-	//
-	
-
-	//while(chord != null){
-	//	chordmatches.push(chord);
-		//do stuff with chord
-	//	v.replace(chordre, transposechord)
-		//
-		//chord = re.exec(v);
-	//}
-
 }
 
 function ultimate_trans(e){
