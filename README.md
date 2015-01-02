@@ -11,9 +11,7 @@ Why
 
 Because I was tired of transposing chords in my head for every song whose chords were written to be played with a capo.
 
-And then I discovered that there was a transpose function.  But I was too lazy to press the transpose button for every song whose chords were written to be played with a capo.
-
-Also, to learn Javascript and how to make a Chrome extension.  Shoutout to [Cloud-to-Butt](https://github.com/panicsteve/cloud-to-butt) because I stole the structure of the code from there.
+Also, to learn Javascript and how to make a Chrome extension.  (Shoutout to [Cloud-to-Butt](https://github.com/panicsteve/cloud-to-butt) because I stole the structure of the code from there.)
 
 Installation
 ------------
