@@ -1,6 +1,6 @@
 var capo = 0;
 var nodesWithCapo = [];
-walk(document.body);
+walk(document.body, true);
 for(var i = 0; i<nodesWithCapo.length; i++){
 	highlightCapo(nodesWithCapo[i]);
 }
@@ -17,9 +17,13 @@ for(var i = 0; i<nodesWithCapo.length; i++){
 //Also, add an option to click a highlighted text "Capo on 5th fret" to turn transposing on and off.
 //maybe also add parser for "tune down half-step" etc., and transpose those as well.
 //
-//MOST PRESSING TO-DO:
+//TO-DO:
 //DO NOT INTERPRET the word "a" as the chord "a".  Example of bad: Love’s c game, want to plaaaaay?
 
+function switchCapos(newCapoNum){
+	walk(document.body, false); //jk this is shitty and does more than necessary.  catalogue all of the html nodes that contain chords?
+	//and then only walk through those?
+}
 
 function highlightCapo(nodeAndText){
 	textNode = nodeAndText[0];
@@ -28,7 +32,7 @@ function highlightCapo(nodeAndText){
 	textNode.parentNode.innerHTML = textNode.parentNode.innerHTML.replace(matchedtext, "<mark>" + matchedmatchedtext + "</mark>");
 }
 
-function walk(node) 
+function walk(node, lookForCapo) 
 {
 	// I stole this function from here:
 	// http://is.gd/mwZp7E
@@ -45,41 +49,43 @@ function walk(node)
 			while ( child ) 
 			{
 				next = child.nextSibling;
-				walk(child);
+				walk(child, lookForCapo);
 				child = next;
 			}
 			break;
 
 		case 3: // Text node
-			handleText(node);
+			handleText(node, lookForCapo);
 			child = node.firstChild;
 			while ( child ) 
 			{
 				next = child.nextSibling;
-				walk(child);
+				walk(child, lookForCapo);
 				child = next;
 			}
 			break;
 	}
 }
 
-function handleText(textNode) 
+function handleText(textNode, lookForCapo) 
 {
-	matches = [];
-	var v = textNode.nodeValue;
-	var re = /capo(?: on| at|:)?(?: the)?\s(\d|first).*?\b(?: fret)?/ig;
-	//what words appear between "capo (on)?" and "\d"?  It seems to be only "the".  If another case is found, update with ".*"
+	if(lookForCapo == true){
+		matches = [];
+		var v = textNode.nodeValue;
+		var re = /capo(?: on| at|:)?(?: the)?\s(\d|first).*?\b(?: fret)?/ig;
+		//what words appear between "capo (on)?" and "\d"?  It seems to be only "the".  If another case is found, update with ".*"
 
-	match = re.exec(v);
-
-	while(match != null){
-		matches.push(match);
 		match = re.exec(v);
-	}
-	
 
-	if(matches.length != 0){
-		getcapo(v, matches, textNode)
+		while(match != null){
+			matches.push(match);
+			match = re.exec(v);
+		}
+		
+
+		if(matches.length != 0){
+			getcapo(v, matches, textNode)
+		}
 	}
 
 	if(capo != 0){ 
