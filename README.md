@@ -1,12 +1,12 @@
 ![Capoless](https://github.com/VitamintK/Capoless/raw/master/capoless/Guitar-icon48.png "capoless!!!!") [Capoless](http://vitamintk.github.io/Capoless/)
 ========
 
-
 Chrome extension to transpose capo-ed guitar chords to their actual keys!!
+
+[Direct Download](https://github.com/VitamintK/Capoless/raw/master/capoless.crx)
 
 ![Capoless](https://github.com/VitamintK/Capoless/raw/gh-pages/images/CAPOLESSCOMPARE.png "capoless!!!!") 
 
-[Direct Download](https://github.com/VitamintK/Capoless/raw/master/capoless.crx)
 
 Why
 =======
