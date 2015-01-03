@@ -3,7 +3,7 @@
 
 Chrome extension to transpose capo-ed guitar chords to their actual keys!!
 
-[Download the Extension!!!](https://github.com/VitamintK/Capoless/raw/master/capoless.crx)
+[Download Capoless](https://github.com/VitamintK/Capoless/raw/master/capoless.crx)
 
 ![Capoless](https://github.com/VitamintK/Capoless/raw/gh-pages/images/CAPOLESSCOMPARE.png "capoless!!!!") 
 
