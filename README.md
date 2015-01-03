@@ -18,6 +18,6 @@ Also, I wanted to learn Javascript and how to make a Chrome extension.
 Installation
 ------------
 
-[Direct Download](https://github.com/VitamintK/Capoless/raw/master/capoless.crx)
+1. [Download Capoless](https://github.com/VitamintK/Capoless/raw/master/capoless.crx)
 
-In Chrome, choose Window > Extensions.  Drag capoless.crx into the page that appears.
+2. In Chrome, choose Window > Extensions.  Drag capoless.crx into the page that appears.
